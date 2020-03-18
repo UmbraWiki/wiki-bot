@@ -1,7 +1,15 @@
 # -*- coding: utf-8  -*-
 
+# this file implements custom pywikibot fixes
+
 # parts of this code comes from
 # https://github.com/pokemoncentral/wiki-util/blob/master/bot/user-fixes.py
+
+except_inside = [
+    r"'{2,3}.+?'{2,3}",
+    r'".+?"',
+    r'\[\[\w{2}:.+?\]\]',
+]
 
 def simplify_link(match, text=None):
     """Simplify a link.
@@ -43,7 +51,7 @@ fixes['interwiki'] = {
 	]
 }
 
-# removes contiguous multiple spaces.
+# removes contiguous multiple and useless spaces.
 
 fixes['spaces'] = {
 	'regex': True,
@@ -52,6 +60,7 @@ fixes['spaces'] = {
         },
 	'replacements': [
 	    (r' +', r" "),
+            (r'^\s+$', r'\n'),
 	]
 }
 
@@ -65,4 +74,29 @@ fixes['redundant-code'] = {
         (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
     ]
+}
+
+# This fix fixes grammatically incorrect text and general misspellings.
+fixes['grammar'] = {
+    'regex': True,
+    'exceptions': {
+        'inside': except_inside,
+    },
+    'msg': {
+        'it': 'Bot: Fixing spelling',
+    },
+    'replacements': [
+        (ur'chè\b', u'ché'),
+        (ur'\bpò\b', "po'"),
+        (ur'\bsè\b', u'sé'),
+        (ur'\bsé\s+stess', 'se stess'),
+        (ur'\bquì\b', 'qui'),
+        (ur'\bquà\b', 'qua'),
+        (ur'\bfà\b', 'fa'),
+        ('metereologic', 'meteorologic'),
+        ('obbiettiv', 'obiettiv'),
+        (u"qual'è", u'qual è'),
+        ('eventualmente', 'infine'),
+        ('sopratutto', 'soprattutto'),
+    ],
 }
