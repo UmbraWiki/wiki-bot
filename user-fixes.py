@@ -73,6 +73,7 @@ fixes['redundant-code'] = {
     'replacements': [
         (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
+	('>==', r'>\n=='),
     ]
 }
 
