@@ -74,6 +74,7 @@ fixes['redundant-code'] = {
         (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
 	('>==', r'>\n=='),
+	('<!-- Titolo generato automaticamente -->', '') #remove comment from refLinks
     ]
 }
 
