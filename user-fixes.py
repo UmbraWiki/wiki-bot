@@ -37,7 +37,7 @@ def simplify_link(match, text=None):
             else '[[{0:s}|{1:s}]]'.format(target, text))
 
 # to invoke these functions:
-# python pwb.py replace -fix:<name> -start:! -always
+# python pwb.py replace -fix:<name> -start:! -always -family:umbrawiki
 
 # removes interwiki.
 
@@ -75,7 +75,7 @@ fixes['redundant-code'] = {
         ('<div></div>', '<br>'),
 	('>==', r'>\n=='),
 	('<!-- Titolo generato automaticamente -->', ''), #remove comment from refLinks
-	('{{ref|', '{{#tag:ref|')
+	(r'{{ref\|', r'{{#tag:ref\|')
     ]
 }
 
