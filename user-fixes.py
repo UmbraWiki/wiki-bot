@@ -75,7 +75,7 @@ fixes['redundant-code'] = {
         ('<div></div>', '<br>'),
 	('>==', r'>\n=='),
 	('<!-- Titolo generato automaticamente -->', ''), #remove comment from refLinks
-	(r'{{ref\|', r'{{#tag:ref\|')
+	(r'{{ref\|', '{{#tag:ref|')
     ]
 }
 
