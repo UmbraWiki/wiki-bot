@@ -39,15 +39,18 @@ def simplify_link(match, text=None):
 # to invoke these functions:
 # python pwb.py replace -fix:<name> -start:! -always -family:umbrawiki
 
-# removes interwiki.
+# clean the source code of pages a bit
 
-fixes['interwiki'] = {
+fixes['code-cleaner'] = {
 	'regex': True,
 	'msg': {
-            'it': 'Bot: removing interwiki',
+            'it': 'Bot: cleaning source code',
         },
 	'replacements': [
-	    (r'\[\[\w\w:[^\n[\]]+]]', r""),
+		(r'\[\[\w\w:[^\n[\]]+]]', r""), #remove interwiki
+		('<!-- Titolo generato automaticamente -->', ''), #remove comment from refLinks
+		(r'{{[Bb]ayonetta}}', ''),
+		(r'{{[Bb]ayonetta {0,1}2}}', ''),
 	]
 }
 
@@ -74,7 +77,6 @@ fixes['redundant-code'] = {
         (r'\[\[(.+?)\|(.+?)\]\]', simplify_link),
         ('<div></div>', '<br>'),
 	('>==', r'>\n=='),
-	('<!-- Titolo generato automaticamente -->', ''), #remove comment from refLinks
 	(r'{{ref\|', '{{#tag:ref|')
     ]
 }
